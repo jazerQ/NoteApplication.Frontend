@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import GetNotes from "./GetNotes";
 
-function NoteForm(){
-    const [formData, setFormData] = useState({title: "", description: ""});
+function NoteForm(props){
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => 
         {
-            setFormData({...formData, [e.target.name]: e.target.value});
+            props.setFormData({...props.formData, [e.target.name]: e.target.value});
         };
     const handleSubmit = async (e) => 
         {
@@ -18,28 +18,32 @@ function NoteForm(){
                     headers: {
                         "Content-Type": "application/json;charset=utf-8"
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(props.formData)
                 })
                 if(!response.ok){
                     throw new Error("Ошибка при отправке формы");
                 }
-                const data = await response.json();
-
+                const fetchedNotes = await GetNotes(props.search.Search, props.search.SortItem, props.search.SortOrder);
+                props.setNotes(fetchedNotes);
             }catch(err)
             {
                 console.error("Error: ", err)
             }finally{
-                setLoading(false);
+               setLoading(false);
+               props.setFormData({title: "", description:""});
             }
         }
         
     return (
-        <div>
-            <form on>
-
+        <div className="formDiv">
+            <form onSubmit={handleSubmit}>
+                <input name="title" value={props.formData.title} onChange={handleChange} placeholder="Введи название"/>
+                <textarea name="description" value={props.formData.description} onChange={handleChange} placeholder="Введи описание"></textarea>
+                <button type="submit" className="formDivBtn">Создать</button>
             </form>
+            {loading ? <p>Создается...</p> : <p></p>}
         </div>
     );
 }
 
-export default NoteForm();
+export default NoteForm;

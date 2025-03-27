@@ -1,41 +1,109 @@
+html{
+  color: #E0E0E0;
+}
+ul, li{
+  margin: 0;
+  padding: 0;
+}
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #121212;
   min-height: 100vh;
 }
 
 .App-logo {
-  height: 10vmin;
+  height: 15vmin;
   pointer-events: none;
+
   
 }
 .HeaderLogo{
   display: flex;
+  justify-content: baseline;
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
-  font-size: 3vmin;
-  flex-direction: column;
+  font-size: 5vmin;
+  flex-direction: row;
   margin: 2vmin;
+  cursor: default;
+}
+h5{
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
 }
 .note{
+  width: 60vmin;
   list-style: none;
-  background-color: #0f50d3;
-  max-width: 40vmin;
-  box-shadow:
-    inset 0 -3em 3em rgb(0 200 0 / 30%),
-    0 0 0 2px white,
-    0.3em 0.3em 1em rgba(68, 67, 67, 0.6);
+  background-color: #2C2C2C;
   border-radius: 1vmin;
-  padding: 2vmin;
-  margin: 3vmin;
+  padding: 10vmin;
+  margin: 4vmin;
   white-space: wrap;
   word-wrap: break-word; 
+}
+.noteString{
+  font-size: 3vmin;
 }
 .notes{
   text-align: center;
   align-items: center;
   display: flex;
   justify-content: center;
+}
+.mainNote{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.formDiv{
+  background-color: #1E1E1E;
+  padding: 4vmin;
+  margin: 4vmin;
+  border-radius: 1vmin;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+}
+input, textarea{
+  background-color: #2C2C2C;
+  border-style: none;
+  border-radius: 1vmin;
+  padding: 1vmin;
+  color: #B0B0B0;
+  font-size: 3.5vmin;
+  transition: 0.2s ease-in-out;
+}
+textarea{
+  width: 45vmin;
+  height: 45vmin;
+}
+input:hover, select:hover, button:hover, textarea:hover{
+  background-color: #444444;
+}
+select{
+  background-color: #2C2C2C;
+  border-style: none;
+  border-radius: 1vmin;
+  padding: 1vmin;
+  font-size: 3.5vmin;
+  color: #B0B0B0;
+  transition: 0.2s ease-in-out;
+}
+.formDivBtn{
+  background-color: #2C2C2C;
+  border-color: #444444;
+  border-style: double;
+  border-radius: 1vmin;
+  color: #E0E0E0;
+  font-size: 3vmin;
+  transition: 0.5s;
+}
+.formDivBtn:hover{
+  border-color: #3A3A3A;
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

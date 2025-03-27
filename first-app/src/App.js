@@ -4,14 +4,14 @@ import './App.css';
 // import Counter from './Counter';
 // import TitleChanger from './TitleChanger';
 //import RequestToServer from './RequestToServer';
-import StringSearch from './stringSearch';
+import Note from './Notes';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <div className='HeaderLogo'>
           <img src={logo} className="App-logo" alt="logo" />
-          My Mad NoteBook
+          <p>My Mad NoteBook</p>
         </div>
         {/* <p>
             <b>Saltan</b>
@@ -21,7 +21,7 @@ function App() {
         <Counter /> */}
         
       </header>
-      <StringSearch/>
+      <Note />
     </div>
   );
 }

@@ -1,31 +1,30 @@
-import { useState } from "react";
-import RequestToServer from "./RequestToServer";
+import { useEffect } from "react"
+import GetNotes from "./GetNotes";
 
-function StringSearch(){
-    const [search, setSearch] = useState({Search: "", SortItem: "", SortOrder: ""});
-    
-    const [notes, setNotes] = useState([])
-
-    const handleChange = (e) => {
+function StringSearch(props){
+    const {search, setSearch, setNotes} = props;
+    const handleChange = async (e) => {
         // Убедимся, что search всегда объект
         setSearch((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
     };
+    useEffect(() => {
+        const data = async () => {
+            try{
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            let response = await fetch(`http://localhost:5062/Notes?Search=${search.Search}&SortItem=${search.SortItem}&SortOrder=${search.SortOrder}`);
-            let result = await response.json();
-
-            setNotes(result.notes);
-        }catch(err)
-        {
-            console.error("ошибка при запросе: ", err);
+                const fetchedNotes = await GetNotes(search.Search, search.SortItem, search.SortOrder);
+                console.log(fetchedNotes)
+                setNotes(fetchedNotes);
+            }catch(err)
+            {
+                console.error("ошибка при запросе: ", err);
+            }
         }
-    }
+        data()
+        },  [search, setNotes]);
+    
     return (
-        <div className="stringSearch">
-            <form onSubmit={handleSubmit}>
+        <div className="formDiv">
+            <form>
                 <input name="Search" value={search.Search} onChange={handleChange} placeholder="Поиск"/>
                 <select name="SortItem" value={search.SortItem} onChange={handleChange}>
                     <option value="">Выбери сортировку</option>
@@ -37,9 +36,7 @@ function StringSearch(){
                     <option value="asc">По возрастанию</option>
                     <option value="desc">По убыванию</option>
                 </select>
-                <button type="submit">Поиск</button>
             </form>
-            <RequestToServer result={notes}/>
         </div>
     );
 }
